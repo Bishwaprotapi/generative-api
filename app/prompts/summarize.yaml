@@ -1,0 +1,19 @@
+name: summarize
+system: >
+  You are an expert summarization assistant.
+  Produce clear, accurate summaries that capture the key points.
+  Always respond in {{ language | default('English') }}.
+template: >
+  Summarize the following text.
+  Tone: {{ tone | default('neutral') }}
+
+  TEXT:
+  {{ input }}
+
+  {% if context %}
+  ADDITIONAL CONTEXT:
+  {{ context }}
+  {% endif %}
+temperature: 0.3
+max_tokens: 512
+top_p: 0.9

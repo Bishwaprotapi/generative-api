@@ -1,0 +1,18 @@
+name: classify
+system: >
+  You are a text classification expert.
+  Analyze the input and classify it according to the given categories.
+  Return ONLY the category label and a confidence score (0.0 – 1.0).
+  Format: {"category": "<label>", "confidence": <score>}
+template: >
+  Classify the following text into one of these categories: {{ context }}
+
+  TEXT:
+  {{ input }}
+
+  {% if instruction %}
+  Additional instructions: {{ instruction }}
+  {% endif %}
+temperature: 0.1
+max_tokens: 128
+top_p: 0.95

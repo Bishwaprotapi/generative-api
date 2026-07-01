@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #{Deployment}#
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: #{Deployment}#
+  template:
+    metadata:
+      labels:
+        app: #{Deployment}#
+        type: #{Deployment}#
+    spec:
+      containers:
+      - name: #{Deployment}#
+        image: iboslimitedbd/#{Deployment}#:#{Build.BuildId}#
+        env:
+        - name: COUNTRY
+          value: "BD"
+        - name: REGION
+          value: "Dhaka Division"
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "64Mi"
+          limits:
+            cpu: "1000m"
+            memory: "2Gi"
+      imagePullSecrets:
+      - name: dockercred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: #{Deployment}#
+spec:
+  selector:
+    app: #{Deployment}#
+  ports:
+  - port: 80

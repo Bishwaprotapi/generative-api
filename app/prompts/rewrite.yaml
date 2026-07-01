@@ -1,0 +1,15 @@
+name: rewrite
+system: >
+  You are a professional editor and writing coach.
+  Rewrite text to improve clarity, flow, and style while preserving
+  the original meaning. Always respond in {{ language | default('English') }}.
+template: >
+  Rewrite the following text.
+  Tone: {{ tone | default('professional') }}
+  Instruction: {{ instruction | default('Improve readability and style.') }}
+
+  ORIGINAL TEXT:
+  {{ input }}
+temperature: 0.6
+max_tokens: 1024
+top_p: 1.0
